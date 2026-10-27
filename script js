@@ -13,7 +13,7 @@
   Example format: 2557XXXXXXXX
 */
 
-const WHATSAPP_NUMBER = "+255679481907";
+const WHATSAPP_NUMBER = "255679481907";
 
 
 // ========================================
