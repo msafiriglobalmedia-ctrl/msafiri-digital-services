@@ -1,0 +1,123 @@
+
+/*
+  MSAFIRI DIGITAL SERVICES
+  JavaScript — Version 1.0
+
+  IMPORTANT:
+  Replace the demo WhatsApp number below
+  with your own number before publishing.
+
+  Tanzania country code: 255
+  Do not include +, spaces, or the leading 0.
+
+  Example format: 2557XXXXXXXX
+*/
+
+const WHATSAPP_NUMBER = "+255679481907";
+
+
+// ========================================
+// 1. MOBILE NAVIGATION MENU
+// ========================================
+
+const menuToggle = document.getElementById("menu-toggle");
+const mainNav = document.getElementById("main-nav");
+
+if (menuToggle && mainNav) {
+  menuToggle.addEventListener("click", () => {
+    const isOpen = mainNav.classList.toggle("open");
+
+    menuToggle.setAttribute(
+      "aria-expanded",
+      String(isOpen)
+    );
+
+    menuToggle.setAttribute(
+      "aria-label",
+      isOpen
+        ? "Close navigation menu"
+        : "Open navigation menu"
+    );
+  });
+
+  // Close the menu after clicking a navigation link.
+  mainNav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      mainNav.classList.remove("open");
+
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute(
+        "aria-label",
+        "Open navigation menu"
+      );
+    });
+  });
+}
+
+
+// ========================================
+// 2. AUTOMATIC COPYRIGHT YEAR
+// ========================================
+
+const yearElement = document.getElementById("current-year");
+
+if (yearElement) {
+  yearElement.textContent = new Date().getFullYear();
+}
+
+
+// ========================================
+// 3. WHATSAPP CONTACT BUTTONS
+// ========================================
+
+// Check whether the number has been configured.
+const isDemoNumber = !/^\d{10,15}$/.test(
+  WHATSAPP_NUMBER
+);
+
+// Find all links that should open WhatsApp.
+document.querySelectorAll(".whatsapp-link").forEach((link) => {
+
+  // Each link can have its own pre-filled message.
+  const message =
+    link.dataset.message ||
+    "Hello Msafiri Digital Services. I would like to ask about your services.";
+
+  // If the demo number is still present, show a warning.
+  if (isDemoNumber) {
+    link.href = "#contact";
+
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      alert(
+        "Please open script.js and replace " +
+        "255XXXXXXXXX with your WhatsApp number. " +
+        "Use country code 255 without + or spaces."
+      );
+    });
+
+    link.setAttribute(
+      "aria-label",
+      "Configure your WhatsApp number before contacting us"
+    );
+
+    return;
+  }
+
+  // Generate the WhatsApp link and encode the message.
+  link.href =
+    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+});
+
+
+// ========================================
+// 4. WEBSITE INITIALIZATION MESSAGE
+// ========================================
+
+console.log(
+  "Msafiri Digital Services website initialized successfully."
+);
