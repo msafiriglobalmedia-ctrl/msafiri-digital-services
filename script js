@@ -10,7 +10,7 @@
   Tanzania country code: 255
   Do not include +, spaces, or the leading 0.
 
-  Example format: 2557XXXXXXXX
+  Example format: 255679481907
 */
 
 const WHATSAPP_NUMBER = "255679481907";
